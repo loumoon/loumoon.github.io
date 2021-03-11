@@ -1,0 +1,83 @@
+<!DOCTYPE html><html lang="zh-Hans"><head><meta name="generator" content="Hexo 3.9.0"><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="CSP课程笔记_02_OS_Structure"><meta name="keywords" content="CSP,课程笔记"><meta name="author" content="Moon Lou"><meta name="copyright" content="Moon Lou"><title>CSP课程笔记_02_OS_Structure | Moon's Blog</title><link rel="shortcut icon" href="/melody-favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.6.1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.6.1"><link rel="dns-prefetch" href="https://cdn.staticfile.org"><link rel="dns-prefetch" href="https://cdn.bootcss.com"><link rel="dns-prefetch" href="https://creativecommons.org"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.css"><script src="https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.js"></script><script src="https://cdn.jsdelivr.net/npm/blueimp-md5@2.10.0/js/md5.min.js"></script><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容:${query}"}},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  }
+} </script></head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar"><div class="toggle-sidebar-info text-center"><span data-toggle="切换文章详情">切换站点概览</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、Operating-System、Kernel、Kernel-Mode、User-Mode"><span class="toc-text">一、Operating System、Kernel、Kernel Mode、User Mode</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、操作系统提供的抽象"><span class="toc-text">二、操作系统提供的抽象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、虚拟存储器-虚拟地址的意义"><span class="toc-text">三、虚拟存储器/虚拟地址的意义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四、Exokernel"><span class="toc-text">四、Exokernel</span></a></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="/img/avatar.jpg"></div><div class="author-info__name text-center">Moon Lou</div><div class="author-info__description text-center"></div><div class="follow-button"><a href="https://github.com/loumoon">关注我</a></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">文章</span><span class="pull-right">31</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">标签</span><span class="pull-right">39</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">分类</span><span class="pull-right">11</span></a></div><hr><div class="author-info-links"><div class="author-info-links__title text-center">Friend Links</div><a class="author-info-links__name text-center" href="https://elody-07.github.io">Elody</a><a class="author-info-links__name text-center" href="http://gaocegege.com/Blog/">高策哥哥</a><a class="author-info-links__name text-center" href="https://molunerfinn.com">MARKSZ</a><a class="author-info-links__name text-center" href="https://sheey.moe">Sheey</a><a class="author-info-links__name text-center" href="https://huangxuan.me/">黄玄</a><a class="author-info-links__name text-center" href="https://blog.azard.me">熊伟伦</a><a class="author-info-links__name text-center" href="https://blindingend.github.io/">Blinding</a></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(/img/top.jpg)"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">Moon's Blog</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus"><a class="site-page social-icon search"><i class="fa fa-search"></i><span> 搜索</span></a><a class="site-page" href="/">主页</a><a class="site-page" href="/archives">归档</a><a class="site-page" href="/tags">标签</a><a class="site-page" href="/categories">分类</a></span></div><div id="post-info"><div id="post-title">CSP课程笔记_02_OS_Structure</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019-10-10</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/课程笔记/">课程笔记</a><i class="fa fa-angle-right" aria-hidden="true"></i><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/课程笔记/《计算机系统原理》/">《计算机系统原理》</a><div class="post-meta-wordcount"><span>字数总计: </span><span class="word-count">2.8k</span><span class="post-meta__separator">|</span><span>阅读时长: 8 分钟</span></div></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><blockquote>
+<p>《计算机系统原理》课程笔记(2)——夏虞斌老师——IPADS Lab</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="一、Operating-System、Kernel、Kernel-Mode、User-Mode"><a href="#一、Operating-System、Kernel、Kernel-Mode、User-Mode" class="headerlink" title="一、Operating System、Kernel、Kernel Mode、User Mode"></a>一、Operating System、Kernel、Kernel Mode、User Mode</h2><p>如何精确地定义操作系统(Operating System)？如何区分操作系统(OS)、内核(Kernel)、内核态(Kernel Mode)、用户态(User Mode)这些概念？操作系统就是内核吗？这些个问题看起来很简单也很基础，但涉及到答案却总是含糊其辞的。</p>
+<p>对于操作系统的定义，我在网络上找到下面这些描述操作系统在计算机系统中位置的图片：</p>
+<p><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g7te5i9qtpj30fo0f6tez.jpg" alt></p>
+<p><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g7te665loyj311e0l6jy3.jpg" alt></p>
+<p><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g7te70rb8rj31140o4176.jpg" alt></p>
+<p>对于这三张图来说，它们都<strong>把操作系统看作是硬件层之上的、用户应用程序之下的软件，它控制计算机的硬件资源，并提供上层应用程序的运行环境</strong>。所有应用程序对硬件的操作都必须通过操作系统。首先明确加粗的这个操作系统定义是正确的。</p>
+<p>目前对操作系统的具体定义有两种观点：</p>
+<blockquote>
+<p>1.当你预定一个操作系统时，零售商所给的所有东西就是操作系统。</p>
+<p>2.内核才是操作系统。因为内核是一直运行在计算机上的程序，内核不运行则计算机无法运行。</p>
+</blockquote>
+<p>观点1最大化了操作系统，比如内置在操作系统中的应用程序比如IE浏览器等并不属于操作系统的组成部分，观点2最小化了操作系统，仅仅将内核视作操作系统，首先内核必是运行在内核态下的，但是对基于微内核(Micro kernel)的操作系统来说，将文件系统也放在了用户态下，这样文件系统将不再属于内核，但是文件系统依然属于操作系统的组成部分。</p>
+<p>图二和图三对操作系统的定义显然属于观点2，即认为操作系统就是内核。在我看来，这样的定义对于基于宏内核(Monolithic Kernel)的操作系统(Linux等）来说<strong>似乎</strong>是解释得通的，但对于其他类型的操作系统来说，有一些模块虽然不在内核中（或者说运行于内核态下），而是运行在用户态下，但这些模块依然属于操作系统的组成部分，如下图所示。</p>
+<p><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g7tfaylwfkj313u0butcx.jpg" alt></p>
+<p>然而即便是对于包含了操作系统一切程序模块的宏内核操作系统来说，“操作系统就是内核”这句话本身依旧是错误的，内核是操作系统的核心，内核一定是运行在内核态下的，而除了内核态，操作系统还提供了用户态作为其他程序的运行环境。这里就涉及到操作系统的“内核态”和“用户态”的概念。</p>
+<p>一般的操作系统对程序的运行（运行的程序的实例即进程）权限进行分级，分别为用户态和内核态。内核态可以执行任何cpu指令，也可以引用任何内存地址，包括外围设备, 例如硬盘, 网卡，权限等级最高。用户态则权利有限，例如在进程的内存分配中，有一部分内存是仅为内核态下使用的，用户态code则不允许访问那些内存地址，而且用户态下进程只允许访问本进程被分配的内存空间，也不允许访问外围设备。</p>
+<p>而内核中的程序模块只能运行在操作系统的内核态下，除此之外，用户态下依然会运行很多程序，对于宏内核操作系统来说，就是用户应用程序，对于微内核操作系统来说，就是用户应用程序以及很多从传统宏内核中抽出来的程序模块（如上图）。因此说操作系统就是内核显然是不对的。<strong>可以总结：运行在内核模式下（即内核中的）程序必然是属于操作系统的，但是运行在用户模式的程序也可能属于操作系统。</strong></p>
+<p>用户应用程序跑在用户态下，但是如果需要执行一些权限不够的操作例如申请内存，网络读写时，就需要转换到内核态去让内核的code帮忙干一些事情，切换用户态到内核态有以下三种方式：</p>
+<blockquote>
+<p>1.系统调用</p>
+<p>这是用户态进程主动要求切换到内核态的一种方式，用户态进程通过系统调用申请使用操作系统提供的服务程序完成工作，比如fork()实际上就是执行了一个创建新进程的系统调用。而系统调用的机制其核心还是使用了操作系统为用户特别开放的一个中断来实现，例如Linux的int 80h中断。</p>
+<p>2.异常</p>
+<p>当CPU在执行运行在用户态下的程序时，发生了某些事先不可知的异常，这时会触发由当前运行进程切换到处理此异常的内核相关程序中，也就转到了内核态，比如缺页异常。</p>
+<p>3.外围设备的中断</p>
+<p>当外围设备完成用户请求的操作后，会向CPU发出相应的中断信号，这时CPU会暂停执行下一条即将要执行的指令转而去执行与中断信号对应的处理程序，如果先前执行的指令是用户态下的程序，那么这个转换的过程自然也就发生了由用户态到内核态的切换。比如硬盘读写操作完成，系统会切换到硬盘读写的中断处理程序中执行后续操作等。</p>
+</blockquote>
+<p>系统调用的本质其实也是中断，相对于外围设备的硬中断，这种中断称为软中断。从触发方式和效果上来看，这三种切换方式是完全一样的，都相当于是执行了一个中断响应的过程。但是从触发的对象来看，系统调用是进程主动请求切换的，而异常和硬中断则是被动的。</p>
+<h2 id="二、操作系统提供的抽象"><a href="#二、操作系统提供的抽象" class="headerlink" title="二、操作系统提供的抽象"></a>二、操作系统提供的抽象</h2><p>计算机系统的分层示图如下：</p>
+<p><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g7u8w5sq5bj30wm07oq4x.jpg" alt></p>
+<p>操作系统即用户应用程序和硬件层之间的一层软件，所有应用程序对硬件的操作都必须通过操作系统。</p>
+<p>操作系统有以下两个基本功能：</p>
+<blockquote>
+<p>1.防止硬件被失控的应用程序滥用。</p>
+<p>2.向应用程序提供简单一致的机制来控制复杂而又大相径庭的低级硬件设备。</p>
+</blockquote>
+<p>为了实现这两个基本功能，操作系统提供了<strong>三层抽象</strong>概念：文件、虚拟存储器和进程。文件是对I/O设备的抽象，虚拟存储器是对主存和I/O设备的抽象，进程是对处理器、主存、I/O设备的抽象。<strong>应用程序只需要和硬件的抽象接口打交道即可，而无需了解硬件的底层原理。</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g7u96be3y3j30sm0cwmzb.jpg" alt></p>
+<p><strong>文件</strong>就是1和0组成的字节序列，所有的I/O设备，包括磁盘、键盘、显示器、鼠标都可以看作文件。文件这个抽象概念向应用程序提供了一个精致又统一的视觉来看待所有I/O设备。</p>
+<p><strong>虚拟存储器</strong>这个抽象概念为进程提供了一个假象，即进程在独占地使用主存，每个进程都看到一样大小的虚拟地址空间，并且自以为主存就和这个虚拟地址空间一样大，均只为自己所用。</p>
+<p><strong>进程</strong>这个抽象概念也为进程提供了一个假象，即进程在独占地使用包括处理器、主存、I/O设备在内的所有硬件，自以为硬件从始自终都在只为自己服务。这实际上是由操作系统调度处理器在进程间进行切换来实现的，操作系统将这种切换机制称为上下文切换，由kernel实现。</p>
+<p>PS：如果不仅仅考虑对硬件的抽象，而是从整个计算机系统的高度来看，还有更高层级的抽象：将操作系统以及计算机底层硬件抽象成一个虚拟机。</p>
+<p><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g7ubnedsa5j312w0f2q61.jpg" alt></p>
+<h2 id="三、虚拟存储器-虚拟地址的意义"><a href="#三、虚拟存储器-虚拟地址的意义" class="headerlink" title="三、虚拟存储器/虚拟地址的意义"></a>三、虚拟存储器/虚拟地址的意义</h2><p>早起的计算机中没有虚拟存储器的概念，要运行一个程序，需要将程序全部装入内存，然后运行，当运行多个程序时会出现以下问题：</p>
+<blockquote>
+<p>1.进程地址空间不隔离，没有权限保护。由于程序都是直接访问物理内存，所以一个进程可以修改其他进程的内存数据，甚至修改内核地址空间中的数据。</p>
+<p>2.内存使用效率低，当内存空间不足时，需要将其他程序的内存数据暂时拷贝到硬盘，然后将新的程序装入内存运行。由于大量的数据装入装出，内存使用效率十分低下。</p>
+<p>3.程序运行的地址不稳定，因为内存地址是随机分配的，所以程序运行的地址也是不确定的。</p>
+</blockquote>
+<p>如上文所说，虚拟存储器其实就是操作系统对主存和I/O设备的抽象，让进程提供了一个在独占地使用主存的假象，而且进程看到的主存大小等于这个虚拟存储器的空间大小，即虚拟地址空间的大小。使用虚拟存储器的抽象有以下几个好处：</p>
+<blockquote>
+<p>1.隔离，保证主存中各个进程占用的空间互不干扰，不会出现属于本进程的主存数据被其他进程修改或覆盖的情况。</p>
+<p>2.为每个进程都提供独立、<strong>连续</strong>且完整的地址空间（虚拟地址空间），给开发者分配、释放和访问内存地址带来方便。</p>
+<p>3.提高内存利用率。针对2来说，如果将主存均等分成若干等大的块，每块分给一个进程使用，也能实现2的作用，但是这样做，一个进程对其分配的内存块经常是用不完的，自己用不了也不允许别人用，导致存在很多未使用的空闲空间。而虚拟存储空间的存在，使主存上的每一寸空间都允许被任何一个进程使用，提高了内存利用率。</p>
+<p>4.控制物理内存的访问权限，数据安全性好。访问的虚拟页若没有读写权限，则触发一个保护异常，终止进程，对数据的访问进行保护，这是直接使用物理内存做不到的。</p>
+</blockquote>
+<h2 id="四、Exokernel"><a href="#四、Exokernel" class="headerlink" title="四、Exokernel"></a>四、Exokernel</h2></div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Moon Lou</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://loumoon.github.io/2019/10/10/CSP课程笔记_02_OS_Structure/">https://loumoon.github.io/2019/10/10/CSP课程笔记_02_OS_Structure/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://loumoon.github.io">Moon's Blog</a>！</span></div></div><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/CSP/">CSP</a><a class="post-meta__tags" href="/tags/课程笔记/">课程笔记</a></div><div class="social-share"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script><nav id="pagination"><div class="prev-post pull-left"><a href="/2019/10/16/Hexo框架+Melody主题的个人博客使用记录/"><i class="fa fa-chevron-left">  </i><span>Hexo框架+Melody主题的个人博客使用记录</span></a></div><div class="next-post pull-right"><a href="/2019/09/25/CSP课程笔记-01-Introduction/"><span>CSP课程笔记_01_Introduction</span><i class="fa fa-chevron-right"></i></a></div></nav><div id="gitalk-container"></div><script>var gitalk = new Gitalk({
+  clientID: 'f63ebded7787ca87f4f9',
+  clientSecret: 'e76d99c38cbb4edca3712ea17decab5581ec0b14',
+  repo: 'loumoon.github.io',
+  owner: 'loumoon',
+  admin: 'loumoon',
+  id: md5(decodeURI(location.pathname)),
+  language: 'zh-CN'
+})
+gitalk.render('gitalk-container')</script></div></div><footer class="footer-bg" style="background-image: url(/img/top.jpg)"><div class="layout" id="footer"><div class="copyright">&copy;2019 - 2021 By Moon Lou</div><div class="framework-info"><span>驱动 - </span><a href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="footer_custom_text">Hi, welcome to my <a href="https://loumoon.github.io/">blog</a>!</div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.6.1"></script><script src="/js/fancybox.js?version=1.6.1"></script><script src="/js/sidebar.js?version=1.6.1"></script><script src="/js/copy.js?version=1.6.1"></script><script src="/js/fireworks.js?version=1.6.1"></script><script src="/js/transition.js?version=1.6.1"></script><script src="/js/scroll.js?version=1.6.1"></script><script src="/js/head.js?version=1.6.1"></script><script src="/js/search/local-search.js"></script><script>if(/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+}</script><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章"></div></div></div><hr><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>由</span> <a href="https://github.com/wzpan/hexo-generator-search" style="color:#49B1F5;">hexo-generator-search</a>
+ <span>提供支持</span></div></div></div><span class="search-close-button"><i class="fa fa-times"></i></span></div><div class="search-mask"></div></body></html>
