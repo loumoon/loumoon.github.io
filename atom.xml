@@ -305,11 +305,11 @@
     
       <category term="Java" scheme="https://loumoon.github.io/tags/Java/"/>
     
-      <category term="多态" scheme="https://loumoon.github.io/tags/%E5%A4%9A%E6%80%81/"/>
-    
       <category term="Jackson" scheme="https://loumoon.github.io/tags/Jackson/"/>
     
       <category term="JSON" scheme="https://loumoon.github.io/tags/JSON/"/>
+    
+      <category term="多态" scheme="https://loumoon.github.io/tags/%E5%A4%9A%E6%80%81/"/>
     
   </entry>
   
@@ -340,9 +340,9 @@
     
       <category term="InfluxDB" scheme="https://loumoon.github.io/tags/InfluxDB/"/>
     
-      <category term="日志管理" scheme="https://loumoon.github.io/tags/%E6%97%A5%E5%BF%97%E7%AE%A1%E7%90%86/"/>
-    
       <category term="Web" scheme="https://loumoon.github.io/tags/Web/"/>
+    
+      <category term="日志管理" scheme="https://loumoon.github.io/tags/%E6%97%A5%E5%BF%97%E7%AE%A1%E7%90%86/"/>
     
   </entry>
   
