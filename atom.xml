@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://loumoon.github.io/"/>
-  <updated>2021-03-12T10:41:06.632Z</updated>
+  <updated>2021-03-12T12:29:49.583Z</updated>
   <id>https://loumoon.github.io/</id>
   
   <author>
@@ -17,11 +17,57 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>Java异常</title>
-    <link href="https://loumoon.github.io/2021/03/12/Java%E5%BC%82%E5%B8%B8%E4%BD%93%E7%B3%BB/"/>
-    <id>https://loumoon.github.io/2021/03/12/Java异常体系/</id>
+    <title>Java知识点</title>
+    <link href="https://loumoon.github.io/2021/03/12/JVM&amp;JRE&amp;JDK%E7%9A%84%E5%85%B3%E7%B3%BB/"/>
+    <id>https://loumoon.github.io/2021/03/12/JVM&amp;JRE&amp;JDK的关系/</id>
+    <published>2021-03-12T11:04:52.000Z</published>
+    <updated>2021-03-12T12:29:49.583Z</updated>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;Java面试知识点总结。&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+    
+      <category term="面试复习" scheme="https://loumoon.github.io/categories/%E9%9D%A2%E8%AF%95%E5%A4%8D%E4%B9%A0/"/>
+    
+    
+      <category term="Java" scheme="https://loumoon.github.io/tags/Java/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Spring Boot知识点</title>
+    <link href="https://loumoon.github.io/2021/03/12/Spring%20Boot%E7%9F%A5%E8%AF%86%E7%82%B9/"/>
+    <id>https://loumoon.github.io/2021/03/12/Spring Boot知识点/</id>
+    <published>2021-03-12T11:00:31.000Z</published>
+    <updated>2021-03-12T12:57:35.957Z</updated>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Spring Boot&lt;/strong&gt;是Spring开源组织下的子项目，是Spring组件一站式解决方案，主要是简化了使用Spring的难度，简省了繁重的配置，提供了各种启动器，开发者能快速上手。&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+    
+      <category term="面试复习" scheme="https://loumoon.github.io/categories/%E9%9D%A2%E8%AF%95%E5%A4%8D%E4%B9%A0/"/>
+    
+    
+      <category term="Spring Boot" scheme="https://loumoon.github.io/tags/Spring-Boot/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Java异常机制</title>
+    <link href="https://loumoon.github.io/2021/03/12/Java%E5%BC%82%E5%B8%B8%E6%9C%BA%E5%88%B6/"/>
+    <id>https://loumoon.github.io/2021/03/12/Java异常机制/</id>
     <published>2021-03-12T06:53:52.000Z</published>
-    <updated>2021-03-12T10:41:06.632Z</updated>
+    <updated>2021-03-12T10:49:33.356Z</updated>
     
     <summary type="html">
     
@@ -328,11 +374,11 @@
     
       <category term="Java" scheme="https://loumoon.github.io/tags/Java/"/>
     
+      <category term="多态" scheme="https://loumoon.github.io/tags/%E5%A4%9A%E6%80%81/"/>
+    
       <category term="Jackson" scheme="https://loumoon.github.io/tags/Jackson/"/>
     
       <category term="JSON" scheme="https://loumoon.github.io/tags/JSON/"/>
-    
-      <category term="多态" scheme="https://loumoon.github.io/tags/%E5%A4%9A%E6%80%81/"/>
     
   </entry>
   
@@ -486,52 +532,6 @@
     
       &lt;blockquote&gt;
 &lt;p&gt;记录一下MacBook核心显卡和独立显卡手动切换的方法（15英寸款）&lt;/p&gt;
-&lt;/blockquote&gt;
-    
-    </summary>
-    
-    
-      <category term="MacBook" scheme="https://loumoon.github.io/categories/MacBook/"/>
-    
-    
-      <category term="MacBook" scheme="https://loumoon.github.io/tags/MacBook/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>MacBook扬声器失效的问题</title>
-    <link href="https://loumoon.github.io/2020/04/24/MacBook%E6%89%AC%E5%A3%B0%E5%99%A8%E5%A4%B1%E6%95%88%E7%9A%84%E9%97%AE%E9%A2%98/"/>
-    <id>https://loumoon.github.io/2020/04/24/MacBook扬声器失效的问题/</id>
-    <published>2020-04-24T06:40:28.000Z</published>
-    <updated>2020-04-24T06:48:54.217Z</updated>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;记录一下如何解决MacBook扬声器失效的问题&lt;/p&gt;
-&lt;/blockquote&gt;
-    
-    </summary>
-    
-    
-      <category term="MacBook" scheme="https://loumoon.github.io/categories/MacBook/"/>
-    
-    
-      <category term="MacBook" scheme="https://loumoon.github.io/tags/MacBook/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>MacBook触控板失效的问题</title>
-    <link href="https://loumoon.github.io/2019/11/04/MacBook%E8%A7%A6%E6%8E%A7%E6%9D%BF%E5%A4%B1%E6%95%88%E7%9A%84%E9%97%AE%E9%A2%98/"/>
-    <id>https://loumoon.github.io/2019/11/04/MacBook触控板失效的问题/</id>
-    <published>2019-11-04T09:04:28.000Z</published>
-    <updated>2019-11-04T09:17:46.871Z</updated>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;记录一下如何解决MacBook触控板失效的问题&lt;/p&gt;
 &lt;/blockquote&gt;
     
     </summary>
