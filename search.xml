@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>Java异常</title>
+      <link href="/2021/03/12/Java%E5%BC%82%E5%B8%B8%E4%BD%93%E7%B3%BB/"/>
+      <url>/2021/03/12/Java%E5%BC%82%E5%B8%B8%E4%BD%93%E7%B3%BB/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p><strong>Java异常</strong>机制，是程序运行不正常时的处理方式。具体来说，异常机制提供了<strong>程序安全退出的通道</strong>。当异常发生时，程序的执行流程改变，<strong>程序控制权转移到异常处理器</strong>。</p></blockquote><a id="more"></a><h3 id="一、Java异常继承体系"><a href="#一、Java异常继承体系" class="headerlink" title="一、Java异常继承体系"></a>一、Java异常继承体系</h3><p>Java异常类的<strong>继承体系</strong>如下图所示：</p><p><img src="https://tva1.sinaimg.cn/large/008eGmZEly1goh4qnwyl4j30hk0mh43v.jpg" alt></p><p><strong>Throwable</strong>类是整个Java异常体系的超类，包括错误Error和异常Exception两个子类。</p><ul><li><strong>Error</strong>表示程序在运行期间出现了十分严重、不可恢复的<strong>错误</strong>，这种情况下应用程序只能终止运行，比如JVM出现错误（VirtualMachineError）。应用程序<strong>一般不捕获Error</strong>，因为它是应用程序所无法处理的情况。</li><li><strong>Exception</strong>是应用程序可以处理的异常，<strong>可以选择</strong>对其进行捕获并处理，包含<strong>运行时异常（RuntimeException）</strong>和<strong>非运行时异常（除RuntimeException外的其他异常）</strong>。<ul><li><strong>运行时异常RuntimeException</strong>是在程序运行时出现的异常，一般是由程序的逻辑错误所引起的，<strong>可以选择捕获处理，也可以不捕获处理</strong>。比如NullPointerException、IndexOutOfBoundsException等。</li><li><strong>非运行时异常</strong>也叫<strong>受检异常</strong>，<strong>必须</strong>在应用程序中对其进行<strong>捕获处理</strong>或者<strong>向上抛出</strong>，否则<strong>无法通过编译器检查</strong>。比如IOException、ClassNotFoundException等。方法内部如果抛出了受检异常，则必须在方法头部声明抛出该受检异常类型。</li></ul></li></ul><p>用户可以在在Java异常体系的基础上<strong>自定义类异常类型</strong>，自定义异常类型要遵循以下原则：</p><ul><li>自定义异常类必须是Throwable的子类。</li><li>如果想自定义一个<strong>受检异常类</strong>，需要<strong>继承Exception类</strong>。</li><li>如果想自定义一个<strong>运行时异常类</strong>，需要<strong>继承RuntimeException类</strong>。</li></ul><h3 id="二、异常的抛出与捕获处理"><a href="#二、异常的抛出与捕获处理" class="headerlink" title="二、异常的抛出与捕获处理"></a>二、异常的抛出与捕获处理</h3><h4 id="1-异常抛出（throw、throws）"><a href="#1-异常抛出（throw、throws）" class="headerlink" title="1.异常抛出（throw、throws）"></a>1.异常抛出（throw、throws）</h4><p><strong>throw</strong>关键字用于<strong>方法体内部</strong>，用来抛出异常。如果抛出的是一个<strong>受检异常</strong>，那么还应该<strong>在方法头部用throws声明抛出的受检异常类型</strong>，该方法的<strong>调用者</strong>也必须<strong>捕获处理</strong>或者<strong>向上抛出</strong>这个受检异常。比如：</p><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">className</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">deposit</span><span class="params">(<span class="keyword">double</span> amount)</span> <span class="keyword">throws</span> RemoteException </span>&#123;</span><br><span class="line">    <span class="comment">// Method implementation</span></span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> RemoteException();</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">//Remainder of class definition</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h4 id="2-异常捕获处理（try…catch…finally"><a href="#2-异常捕获处理（try…catch…finally" class="headerlink" title="2.异常捕获处理（try…catch…finally)"></a>2.异常捕获处理（try…catch…finally)</h4><p>try代码块中某位置抛出了异常，则该位置之后的代码再也没有机会被执行。</p><p>catch可以有多个，一个try代码块后面跟随多个catch代码块的情况叫<strong>多重捕获</strong>，根据异常的类型<strong>从上往下匹配</strong>，如果有匹配的catch，下面的所有catch会被全部忽略。</p><p>多重捕获下要先catch子类异常再catch父类异常，即<strong>子类异常的catch块在父类异常catch块的上面</strong>。如果顺序反了的话，那么根据Java继承思想，<strong>所有子类异常对象都是父类异常对象</strong>，导致父类异常永远先被捕获到，而捕获子类异常的catch块永远得不到执行，出现<strong>编译错误</strong>。比如下面的代码：（ArithmeticException是Exception的子类，属于受检异常）</p><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ExceptionErrorDemo</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[] numbers = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">3</span>];</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            numbers[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">            numbers[<span class="number">1</span>] = <span class="number">3</span>;</span><br><span class="line">            numbers[<span class="number">2</span>] = <span class="number">7</span>;</span><br><span class="line">            numbers[<span class="number">3</span>] = numbers[<span class="number">2</span>] / <span class="number">0</span>;<span class="comment">//会抛出算术运算异常;</span></span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            System.out.println(e.toString());</span><br><span class="line">        &#125; <span class="keyword">catch</span> (ArithmeticException e) &#123;</span><br><span class="line">            e.toString();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>无论try代码块中是否发生异常，<strong>finally代码块都会被执行</strong>。通常可以在finally块中进行资源的回收工作，比如关闭打开的文件、删除临时文件等。</p><p>如果try、catch块中有return语句，会先把返回值<strong>压栈</strong>，然后再执行finally语句，<strong>执行完finally语句后再返回</strong>。即使在finally中更改了要返回的变量的值，程序依然会返回之前已经压栈的值，而不是在finally中更新后的值。当然，如果try、catch中返回的变量是一个<strong>对象引用</strong>而非基本类型，由于引用已经压栈无法更改，可以通过在finally块中更改引用指向的对象的内容，来影响返回结果。如果finally中有return语句，那么直接忽略try、catch中的return语句，<strong>只执行finally的return</strong>。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 面试复习 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Java </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Java的类加载器</title>
       <link href="/2021/03/10/Java%E7%9A%84%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/"/>
       <url>/2021/03/10/Java%E7%9A%84%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/</url>
@@ -347,9 +372,9 @@
             
             <tag> InfluxDB </tag>
             
-            <tag> Web </tag>
-            
             <tag> 日志管理 </tag>
+            
+            <tag> Web </tag>
             
         </tags>
       
@@ -600,9 +625,9 @@
       
         <tags>
             
-            <tag> MacBook </tag>
-            
             <tag> Spring Boot </tag>
+            
+            <tag> MacBook </tag>
             
         </tags>
       

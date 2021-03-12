@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://loumoon.github.io/"/>
-  <updated>2021-03-11T14:22:14.120Z</updated>
+  <updated>2021-03-12T10:41:06.632Z</updated>
   <id>https://loumoon.github.io/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Java异常</title>
+    <link href="https://loumoon.github.io/2021/03/12/Java%E5%BC%82%E5%B8%B8%E4%BD%93%E7%B3%BB/"/>
+    <id>https://loumoon.github.io/2021/03/12/Java异常体系/</id>
+    <published>2021-03-12T06:53:52.000Z</published>
+    <updated>2021-03-12T10:41:06.632Z</updated>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Java异常&lt;/strong&gt;机制，是程序运行不正常时的处理方式。具体来说，异常机制提供了&lt;strong&gt;程序安全退出的通道&lt;/strong&gt;。当异常发生时，程序的执行流程改变，&lt;strong&gt;程序控制权转移到异常处理器&lt;/strong&gt;。&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+    
+      <category term="面试复习" scheme="https://loumoon.github.io/categories/%E9%9D%A2%E8%AF%95%E5%A4%8D%E4%B9%A0/"/>
+    
+    
+      <category term="Java" scheme="https://loumoon.github.io/tags/Java/"/>
+    
+  </entry>
   
   <entry>
     <title>Java的类加载器</title>
@@ -340,9 +363,9 @@
     
       <category term="InfluxDB" scheme="https://loumoon.github.io/tags/InfluxDB/"/>
     
-      <category term="Web" scheme="https://loumoon.github.io/tags/Web/"/>
-    
       <category term="日志管理" scheme="https://loumoon.github.io/tags/%E6%97%A5%E5%BF%97%E7%AE%A1%E7%90%86/"/>
+    
+      <category term="Web" scheme="https://loumoon.github.io/tags/Web/"/>
     
   </entry>
   
@@ -518,41 +541,6 @@
     
     
       <category term="MacBook" scheme="https://loumoon.github.io/tags/MacBook/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Web开发中会话管理的三种方式</title>
-    <link href="https://loumoon.github.io/2019/10/25/Web%E5%BC%80%E5%8F%91%E4%B8%AD%E4%BC%9A%E8%AF%9D%E7%AE%A1%E7%90%86%E7%9A%84%E4%B8%89%E7%A7%8D%E6%96%B9%E5%BC%8F/"/>
-    <id>https://loumoon.github.io/2019/10/25/Web开发中会话管理的三种方式/</id>
-    <published>2019-10-25T05:27:31.000Z</published>
-    <updated>2020-08-07T06:36:07.068Z</updated>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;总结Web开发中会话管理的三种方式：基于Server端Session的管理方式、基于Cookie的管理方式、基于Token的管理方式。&lt;/p&gt;
-&lt;/blockquote&gt;
-    
-    </summary>
-    
-    
-      <category term="Web开发" scheme="https://loumoon.github.io/categories/Web%E5%BC%80%E5%8F%91/"/>
-    
-    
-      <category term="Java" scheme="https://loumoon.github.io/tags/Java/"/>
-    
-      <category term="Web" scheme="https://loumoon.github.io/tags/Web/"/>
-    
-      <category term="会话管理" scheme="https://loumoon.github.io/tags/%E4%BC%9A%E8%AF%9D%E7%AE%A1%E7%90%86/"/>
-    
-      <category term="Session" scheme="https://loumoon.github.io/tags/Session/"/>
-    
-      <category term="Cookie" scheme="https://loumoon.github.io/tags/Cookie/"/>
-    
-      <category term="Token" scheme="https://loumoon.github.io/tags/Token/"/>
-    
-      <category term="登录" scheme="https://loumoon.github.io/tags/%E7%99%BB%E5%BD%95/"/>
     
   </entry>
   
