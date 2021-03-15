@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://loumoon.github.io/"/>
-  <updated>2021-03-12T14:05:34.824Z</updated>
+  <updated>2021-03-15T07:15:55.984Z</updated>
   <id>https://loumoon.github.io/</id>
   
   <author>
@@ -17,16 +17,45 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>Spring Boot注解配置</title>
-    <link href="https://loumoon.github.io/2021/03/12/Spring%20Boot%E6%B3%A8%E8%A7%A3%E9%85%8D%E7%BD%AE/"/>
-    <id>https://loumoon.github.io/2021/03/12/Spring Boot注解配置/</id>
-    <published>2021-03-12T13:07:31.000Z</published>
-    <updated>2021-03-12T14:05:34.824Z</updated>
+    <title>Spring Data JPA</title>
+    <link href="https://loumoon.github.io/2021/03/14/Spring%20Data%20JPA/"/>
+    <id>https://loumoon.github.io/2021/03/14/Spring Data JPA/</id>
+    <published>2021-03-14T13:23:31.000Z</published>
+    <updated>2021-03-15T07:15:55.984Z</updated>
     
     <summary type="html">
     
       &lt;blockquote&gt;
-&lt;p&gt;Spring Boot不像Spring采用XML配置，而是使用Java Config注解配置，配置方法更加简化。本文总结了Spring Boot的核心注解和常用注解。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Spring Data JPA&lt;/strong&gt;是基于&lt;strong&gt;Hibernate&lt;/strong&gt;及&lt;strong&gt;JPA规范&lt;/strong&gt;的一套&lt;strong&gt;ORM框架&lt;/strong&gt;。目前主流的ORM框架有：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;MyBatis&lt;/li&gt;
+&lt;li&gt;Hibernate&lt;/li&gt;
+&lt;li&gt;Spring Data JPA&lt;/li&gt;
+&lt;li&gt;Spring JDBC Template&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+    
+      <category term="面试复习" scheme="https://loumoon.github.io/categories/%E9%9D%A2%E8%AF%95%E5%A4%8D%E4%B9%A0/"/>
+    
+    
+      <category term="Spring Boot" scheme="https://loumoon.github.io/tags/Spring-Boot/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Spring Boot的Java Config</title>
+    <link href="https://loumoon.github.io/2021/03/12/Spring%20Java%20Config/"/>
+    <id>https://loumoon.github.io/2021/03/12/Spring Java Config/</id>
+    <published>2021-03-12T13:07:31.000Z</published>
+    <updated>2021-03-14T12:28:46.944Z</updated>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;Spring Boot不像Spring采用XML配置，而是使用Spring JavaConfig注解配置，配置方法更加简化。本文总结了Spring Boot的核心注解和常用注解。&lt;/p&gt;
 &lt;/blockquote&gt;
     
     </summary>
@@ -67,7 +96,7 @@
     <link href="https://loumoon.github.io/2021/03/12/Spring%20Boot%E7%9F%A5%E8%AF%86%E7%82%B9/"/>
     <id>https://loumoon.github.io/2021/03/12/Spring Boot知识点/</id>
     <published>2021-03-12T11:00:31.000Z</published>
-    <updated>2021-03-12T13:06:36.989Z</updated>
+    <updated>2021-03-14T12:21:53.126Z</updated>
     
     <summary type="html">
     
@@ -397,11 +426,11 @@
     
       <category term="Java" scheme="https://loumoon.github.io/tags/Java/"/>
     
-      <category term="多态" scheme="https://loumoon.github.io/tags/%E5%A4%9A%E6%80%81/"/>
-    
       <category term="Jackson" scheme="https://loumoon.github.io/tags/Jackson/"/>
     
       <category term="JSON" scheme="https://loumoon.github.io/tags/JSON/"/>
+    
+      <category term="多态" scheme="https://loumoon.github.io/tags/%E5%A4%9A%E6%80%81/"/>
     
   </entry>
   
@@ -516,31 +545,6 @@
       <category term="时序数据库" scheme="https://loumoon.github.io/tags/%E6%97%B6%E5%BA%8F%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
     
       <category term="InfluxDB" scheme="https://loumoon.github.io/tags/InfluxDB/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>MacBook关闭端口占用</title>
-    <link href="https://loumoon.github.io/2020/04/24/MacBook%E5%85%B3%E9%97%AD%E7%AB%AF%E5%8F%A3%E5%8D%A0%E7%94%A8/"/>
-    <id>https://loumoon.github.io/2020/04/24/MacBook关闭端口占用/</id>
-    <published>2020-04-24T07:03:28.000Z</published>
-    <updated>2020-04-24T07:10:42.513Z</updated>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;记录一下MacBook查询并关闭占用某端口的进程的方法&lt;/p&gt;
-&lt;/blockquote&gt;
-    
-    </summary>
-    
-    
-      <category term="Web开发" scheme="https://loumoon.github.io/categories/Web%E5%BC%80%E5%8F%91/"/>
-    
-    
-      <category term="Java" scheme="https://loumoon.github.io/tags/Java/"/>
-    
-      <category term="MacBook" scheme="https://loumoon.github.io/tags/MacBook/"/>
     
   </entry>
   
