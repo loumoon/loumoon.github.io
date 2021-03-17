@@ -1,0 +1,93 @@
+<!DOCTYPE html><html lang="zh-Hans"><head><meta name="generator" content="Hexo 3.9.0"><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="Java内存"><meta name="keywords" content="Java,JVM"><meta name="author" content="Moon Lou"><meta name="copyright" content="Moon Lou"><title>Java内存 | Moon's Blog</title><link rel="shortcut icon" href="/melody-favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.6.1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.6.1"><link rel="dns-prefetch" href="https://cdn.staticfile.org"><link rel="dns-prefetch" href="https://cdn.bootcss.com"><link rel="dns-prefetch" href="https://creativecommons.org"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.css"><script src="https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.js"></script><script src="https://cdn.jsdelivr.net/npm/blueimp-md5@2.10.0/js/md5.min.js"></script><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容:${query}"}},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  }
+} </script></head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar"><div class="toggle-sidebar-info text-center"><span data-toggle="切换文章详情">切换站点概览</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、运行时数据区域"><span class="toc-text">一、运行时数据区域</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-程序计数器"><span class="toc-text">1.程序计数器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Java虚拟机栈"><span class="toc-text">2.Java虚拟机栈</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-本地方法栈"><span class="toc-text">3.本地方法栈</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-Java堆"><span class="toc-text">4.Java堆</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-方法区"><span class="toc-text">5.方法区</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、对象探秘"><span class="toc-text">二、对象探秘</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-对象创建"><span class="toc-text">1.对象创建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-对象的访问定位"><span class="toc-text">2.对象的访问定位</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、内存泄露异常（OutOfMemoryError，OOM）"><span class="toc-text">三、内存泄露异常（OutOfMemoryError，OOM）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Java堆溢出"><span class="toc-text">1.Java堆溢出</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-虚拟机栈和本地方法栈溢出"><span class="toc-text">2.虚拟机栈和本地方法栈溢出</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-方法区溢出"><span class="toc-text">3.方法区溢出</span></a></li></ol></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="/img/avatar.jpg"></div><div class="author-info__name text-center">Moon Lou</div><div class="author-info__description text-center"></div><div class="follow-button"><a href="https://github.com/loumoon">关注我</a></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">文章</span><span class="pull-right">37</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">标签</span><span class="pull-right">39</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">分类</span><span class="pull-right">11</span></a></div><hr><div class="author-info-links"><div class="author-info-links__title text-center">Friend Links</div><a class="author-info-links__name text-center" href="https://elody-07.github.io">Elody</a><a class="author-info-links__name text-center" href="http://gaocegege.com/Blog/">高策哥哥</a><a class="author-info-links__name text-center" href="https://molunerfinn.com">MARKSZ</a><a class="author-info-links__name text-center" href="https://sheey.moe">Sheey</a><a class="author-info-links__name text-center" href="https://huangxuan.me/">黄玄</a><a class="author-info-links__name text-center" href="https://blog.azard.me">熊伟伦</a><a class="author-info-links__name text-center" href="https://blindingend.github.io/">Blinding</a></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(/img/top.jpg)"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">Moon's Blog</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus"><a class="site-page social-icon search"><i class="fa fa-search"></i><span> 搜索</span></a><a class="site-page" href="/">主页</a><a class="site-page" href="/archives">归档</a><a class="site-page" href="/tags">标签</a><a class="site-page" href="/categories">分类</a></span></div><div id="post-info"><div id="post-title">Java内存</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2021-03-17</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/面试复习/">面试复习</a><div class="post-meta-wordcount"><span>字数总计: </span><span class="word-count">2.4k</span><span class="post-meta__separator">|</span><span>阅读时长: 7 分钟</span></div></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><blockquote>
+<p>JVM在执行Java程序的过程中会把它所管理的内存划分为若干不同的数据区域，这些不同的数据区域共同构成Java的内存结构。Java<strong>内存结构</strong>和<strong>内存模型（JMM）</strong>是两个不同的概念，<strong>本文讨论的是Java的内存结构</strong>。</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="一、运行时数据区域"><a href="#一、运行时数据区域" class="headerlink" title="一、运行时数据区域"></a>一、运行时数据区域</h2><p><img src="https://tva1.sinaimg.cn/large/008eGmZEly1gomyxd1r2oj30h90eegqm.jpg" alt></p>
+<h3 id="1-程序计数器"><a href="#1-程序计数器" class="headerlink" title="1.程序计数器"></a>1.程序计数器</h3><p>程序计数器是<strong>当前线程所执行的字节码的行号指示器</strong>。每条线程都要有一个独立的程序计数器，各条线程之间的计数器互不影响，独立存储，属于<strong>线程私有</strong>的内存。程序计数器是<strong>唯一一个</strong>在Java虚拟机规范里<strong>没有规定任何OutOfMemoryError情况</strong>的区域，因为它只保存一个固定大小的地址。</p>
+<h3 id="2-Java虚拟机栈"><a href="#2-Java虚拟机栈" class="headerlink" title="2.Java虚拟机栈"></a>2.Java虚拟机栈</h3><p>虚拟机栈也是<strong>线程私有</strong>的，每个线程都有独立的栈，栈的生命周期与线程相同。虚拟机栈是<strong>描述Java方法执行的内存模型</strong>：Java方法在开始执行时都会创建一个<strong>栈桢</strong>，用于存储局部变量表、操作数栈、动态链接、方法出口等信息。<strong>每个Java方法从调用到执行完成的过程，就是对应栈桢从该线程栈中从入栈到出栈的过程</strong>。</p>
+<p><strong>局部变量表</strong>存放编译期可知的8种<strong>基本数据类型</strong>和<strong>对象引用</strong>reference，其所需内存空间在<strong>编译期</strong>就完成分配，当<strong>程序运行时</strong>进入一个方法时，这个方法需要在<strong>栈桢</strong>中分配多大的局部变量表空间时完全<strong>确定</strong>的，方法运行期间不会改变局部变量表的大小。</p>
+<h3 id="3-本地方法栈"><a href="#3-本地方法栈" class="headerlink" title="3.本地方法栈"></a>3.本地方法栈</h3><p><strong>线程私有</strong>，虚拟机栈为Java方法服务，本地方法栈为<strong>Native方法</strong>服务。</p>
+<h3 id="4-Java堆"><a href="#4-Java堆" class="headerlink" title="4.Java堆"></a>4.Java堆</h3><p>Java堆是<strong>所有线程共享</strong>的区域，唯一目的就是<strong>存放对象实例</strong>。从<strong>垃圾回收</strong>的角度看，Java堆可以细分为<strong>新生代和老年代</strong>，从<strong>内存模型（JMM）</strong>的角度看，可以划分出多个线程私有的<strong>分配缓冲区（Thread Local Allocation Buffer, TLAB）</strong>。</p>
+<h3 id="5-方法区"><a href="#5-方法区" class="headerlink" title="5.方法区"></a>5.方法区</h3><p>方法区也是线程共享的内存区域，用于存储<strong>已被虚拟机加载的类信息、常量、静态变量</strong>等数据。根据HotSpot规范，从垃圾回收的角度，方法区被划为<strong>永久代</strong>，现在已经改成了<strong>元空间（在本地内存Native Memory）</strong>。方法区是JVM的规范，永久代/元空间是HotSpot实现方法区的技术细节。</p>
+<p><strong>运行时常量池</strong>是方法区的一部分。注意<strong>Class文件中也有常量池</strong>，用于存放编译期生成的各种字面量和<strong>符号引用</strong>，这部分内容将在<strong>类加载后</strong>进入方法区的运行时常量池中存放。在类加载的<strong>链接-解析阶段</strong>，会将<strong>符号引用替换为直接引用</strong>（<strong>句柄</strong>或<strong>直接指针</strong>）。</p>
+<p>运行时常量池相对于Class文件常量池的另一个重要特征是具备<strong>动态性</strong>，即常量并不一定只有在编译期（Class文件生成的时期）产生，也就是<strong>并非预置入Class文件常量池中的内容才能进入运行时常量池</strong>，<strong>运行时也能将新的常量放入池中</strong>。比如String的intern()方法：</p>
+<ul>
+<li>JDK1.6中，intern()将首次遇到的String<strong>实例复制</strong>到字符串常量池，然后返回这个复制实例的引用。返回的是指向字符串常量池的引用。</li>
+<li>JDK1.7后，intern()将首次遇到的String实例的<strong>引用</strong>保存到字符串常量池中，并返回这个引用。返回的是指向Java堆的引用。</li>
+</ul>
+<p><strong>字符串常量池</strong>原本作为<strong>运行时常量池的一部分</strong>，存在于<strong>方法区</strong>，在JDK1.7之后被剥离出来，<strong>移动到Java堆中</strong>。</p>
+<h2 id="二、对象探秘"><a href="#二、对象探秘" class="headerlink" title="二、对象探秘"></a>二、对象探秘</h2><h3 id="1-对象创建"><a href="#1-对象创建" class="headerlink" title="1.对象创建"></a>1.对象创建</h3><p>通过<strong>new关键字</strong>来创建对象，JVM遇到new指令时，<strong>先去检查对象所属类是否已经加载</strong>（包含加载、链接和初始化三个阶段），如果没有，那么需要先执行类加载过程。</p>
+<p>类加载完毕后将在Java堆中为对象分配内存，对象所需内存大小在类加载完成后就<strong>完全确定</strong>了，因此只需要在堆中划分出一块确定大小的空闲内存分配给对象。</p>
+<p>内存分配有<strong>指针碰撞</strong>和<strong>空闲列表</strong>两种方式：</p>
+<ul>
+<li>当java堆中内存<strong>绝对规整</strong>，已占用内存在一边，空闲内存在另一边，采用指针碰撞方法（指针顺移，直到碰撞到已占用内存块）。</li>
+<li>当Java堆内存<strong>不规整</strong>，已使用和未使用的内存块交错排布，采用空闲列表方法（维护一个列表，记录哪些内存块可用，为对象分配一个足够大的内存块）。</li>
+</ul>
+<p><strong>Java堆是否规整取决于JVM采用的GC算法</strong>：</p>
+<ul>
+<li>如果采用<strong>标记-清理算法</strong>，堆内存是不规整的，采用空闲列表方法。</li>
+<li>如果采用的是<strong>复制算法、标记-整理算法</strong>，堆内存规整，采用指针碰撞方法。</li>
+</ul>
+<p>内存分配可能存在<strong>线程安全问题</strong>，解决方案：</p>
+<ul>
+<li>对每次分配内存空间（移动指针）的动作进行同步，保证更新操作的原子性。</li>
+<li>为每个线程，在Java堆中分配一块<strong>本地线程分配缓冲</strong>TLAB（线程工作内存），TLAB用完后再同步到主存。相比于第一种方法的优点是效率更高，因为不用频繁的锁，缺点是占用空间，而且不保证即时<strong>可见性</strong>。</li>
+</ul>
+<p>内存分配完成后，执行<strong>默认初始化</strong>，将对象的内存空间初始化为0值。</p>
+<p>然后设置对象的<strong>对象头</strong>（Object Header），保存对象是哪个类的实例、如何找到类的元数据信息、<strong>对象的HashCode</strong>、<strong>对象的分代年龄</strong>等信息。对象的内存布局可以分为<strong>对象头</strong>、<strong>实例数据</strong>和<strong>对齐填充</strong>三部分。</p>
+<p>最后进行对象的<strong>指定初始化</strong>，即按照程序猿的意愿（code），初始化对象的各属性值。</p>
+<h3 id="2-对象的访问定位"><a href="#2-对象的访问定位" class="headerlink" title="2.对象的访问定位"></a>2.对象的访问定位</h3><p>对象的访问通过<strong>引用reference</strong>，引用方式包括<strong>句柄</strong>和<strong>直接指针</strong>两种：</p>
+<ul>
+<li>使用句柄访问，Java堆中会划分出一块内存作为<strong>句柄池</strong>，reference中存储<strong>句柄地址</strong>，句柄中包含了<strong>对象地址</strong>和<strong>类型信息的地址</strong>。因此<strong>访问对象和类型信息都需要两次指针定位</strong>。</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/008eGmZEly1gon299jhm7j30l608975w.jpg" alt></p>
+<ul>
+<li>使用直接指针访问，reference中<strong>直接存储对象地址</strong>，通过<strong>对象头</strong>中的<strong>类型信息指针</strong>访问类型信息。因此<strong>访问对象只需要一次指针定位，访问类型信息需要两次定位</strong>。</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/008eGmZEly1gon29ys618j30ku086gmw.jpg" alt></p>
+<p>句柄访问的优势是reference中存储稳定的句柄地址，<strong>当对象被移动（GC时）时只需要改变句柄中的对象地址</strong>，而reference本身不需要更改（<strong>对象的引用可能很多，而对象的句柄只有一个，因此只需要改一次</strong>）</p>
+<p>直接指针访问的优势是<strong>访问对象的速度更快</strong>，因为<strong>节省了一次指针定位</strong>的时间开销。</p>
+<h2 id="三、内存泄露异常（OutOfMemoryError，OOM）"><a href="#三、内存泄露异常（OutOfMemoryError，OOM）" class="headerlink" title="三、内存泄露异常（OutOfMemoryError，OOM）"></a>三、内存泄露异常（OutOfMemoryError，OOM）</h2><p>JVM的内存区域中，<strong>除了程序计数器之外</strong>，其他几个内存区域都可能会发生OOM异常，虽然叫异常，但是英文全称是<strong>OutOfMemoryError</strong>，<strong>属于Java异常体系中的错误Error</strong>。</p>
+<h3 id="1-Java堆溢出"><a href="#1-Java堆溢出" class="headerlink" title="1.Java堆溢出"></a>1.Java堆溢出</h3><p>堆溢出包括<strong>内存泄漏（Memory Leak）</strong>和<strong>内存溢出（Memory Overflow）</strong>两种情况：</p>
+<ul>
+<li><strong>内存泄漏</strong>：<strong>该回收的对象没有被回收</strong>。<strong>查看泄漏对象到GC Roots的引用链</strong>，定位泄漏代码，找到泄漏对象是通过怎样的路径关联到GC Roots，导致垃圾回收器无法自动回收它们的。</li>
+<li><strong>内存溢出</strong>：<strong>内存中的对象还确实都应该活着</strong>。检查是否存在<strong>某些对象生命周期过长</strong>、持有状态时间过长的情况，或者考虑<strong>调大堆内存</strong>。</li>
+</ul>
+<h3 id="2-虚拟机栈和本地方法栈溢出"><a href="#2-虚拟机栈和本地方法栈溢出" class="headerlink" title="2.虚拟机栈和本地方法栈溢出"></a>2.虚拟机栈和本地方法栈溢出</h3><p>栈内存包括两种异常<strong>StackOverflowError</strong>和<strong>OutOfMemoryError（OOM）</strong>：</p>
+<ul>
+<li><strong>StackOverflowError</strong>：线程请求的栈深度大于虚拟机所允许的最大深度（往死里递归）。</li>
+<li><strong>OutOfMemoryError</strong>：虚拟机扩展栈时无法申请到足够的内存空间。</li>
+</ul>
+<p><strong>单线程</strong>情况下，一般都是抛出<strong>StackOverflowError</strong>；<strong>多线程</strong>的情况下，不断建立新的线程，从而分配新的栈，最终导致没有足够的内存去分配新的栈，导致<strong>OutOfMemoryError</strong>。</p>
+<p>如果是因为建立多线程导致的OOM，可以考虑<strong>减少堆容量</strong>（这样栈空间就更大了）或者<strong>减少栈容量</strong>来换取更多的线程（栈空间一定，就能分配数量更多的栈了）。精髓是通过“减少内存”的手段来解决内存溢出问题。</p>
+<h3 id="3-方法区溢出"><a href="#3-方法区溢出" class="headerlink" title="3.方法区溢出"></a>3.方法区溢出</h3><p>JDK8以前，<strong>永久代</strong>是HotSpot对方法区的具体实现。方法区的溢出有以下可能原因：</p>
+<ul>
+<li>JDK7之前，频繁使用<strong>String.intern()</strong>方法（会将String实例从堆中复制到字符串常量池）。</li>
+<li>运行期间生成了<strong>大量代理类</strong>，导致方法区被撑爆，无法卸载。</li>
+<li>应用长时间运行，没有重启。</li>
+</ul>
+<p>JDK8之后，<strong>元空间</strong>替换了永久代实现，<strong>元空间使用本地内存</strong>，<strong>字符串常量池也从方法区移到了堆中</strong>，都能帮助避免方法区泄漏。</p>
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Moon Lou</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://loumoon.github.io/2021/03/17/Java内存/">https://loumoon.github.io/2021/03/17/Java内存/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://loumoon.github.io">Moon's Blog</a>！</span></div></div><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Java/">Java</a><a class="post-meta__tags" href="/tags/JVM/">JVM</a></div><div class="social-share"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script><nav id="pagination"><div class="next-post pull-right"><a href="/2021/03/14/Spring Data JPA/"><span>Spring Data JPA</span><i class="fa fa-chevron-right"></i></a></div></nav><div id="gitalk-container"></div><script>var gitalk = new Gitalk({
+  clientID: 'f63ebded7787ca87f4f9',
+  clientSecret: 'e76d99c38cbb4edca3712ea17decab5581ec0b14',
+  repo: 'loumoon.github.io',
+  owner: 'loumoon',
+  admin: 'loumoon',
+  id: md5(decodeURI(location.pathname)),
+  language: 'zh-CN'
+})
+gitalk.render('gitalk-container')</script></div></div><footer class="footer-bg" style="background-image: url(/img/top.jpg)"><div class="layout" id="footer"><div class="copyright">&copy;2019 - 2021 By Moon Lou</div><div class="framework-info"><span>驱动 - </span><a href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="footer_custom_text">Hi, welcome to my <a href="https://loumoon.github.io/">blog</a>!</div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.6.1"></script><script src="/js/fancybox.js?version=1.6.1"></script><script src="/js/sidebar.js?version=1.6.1"></script><script src="/js/copy.js?version=1.6.1"></script><script src="/js/fireworks.js?version=1.6.1"></script><script src="/js/transition.js?version=1.6.1"></script><script src="/js/scroll.js?version=1.6.1"></script><script src="/js/head.js?version=1.6.1"></script><script src="/js/search/local-search.js"></script><script>if(/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+}</script><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章"></div></div></div><hr><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>由</span> <a href="https://github.com/wzpan/hexo-generator-search" style="color:#49B1F5;">hexo-generator-search</a>
+ <span>提供支持</span></div></div></div><span class="search-close-button"><i class="fa fa-times"></i></span></div><div class="search-mask"></div></body></html>
